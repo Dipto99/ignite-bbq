@@ -126,7 +126,17 @@
         const res = await fetch(url, {
           headers: { "x-admin-key": adminKey },
         });
-        const data = await res.json();
+
+        let data;
+        try {
+          data = await res.json();
+        } catch {
+          // The response wasn't JSON at all — usually means the function
+          // itself couldn't be reached (e.g. a 404 page came back instead).
+          throw new Error(
+            `Unexpected response from the server (status ${res.status}). The get-orders function may not be deployed.`
+          );
+        }
 
         if (!res.ok) {
           loginBox.classList.remove("hidden");
@@ -140,7 +150,11 @@
         wrap.classList.remove("hidden");
         renderBatches(data.batches, data.maxBookings);
       } catch (err) {
-        ordersContainer.innerHTML = "<p>Could not reach the server.</p>";
+        console.error("Admin loadOrders failed:", err);
+        loginBox.classList.remove("hidden");
+        wrap.classList.add("hidden");
+        loginError.textContent = err.message || "Could not reach the server.";
+        loginError.classList.remove("hidden");
       }
     }
 
