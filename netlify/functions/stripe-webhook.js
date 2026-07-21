@@ -1,4 +1,4 @@
-const { getStore } = require("@netlify/blobs");
+const { getStore, connectLambda } = require("@netlify/blobs");
 const { MAX_BOOKINGS, generateOrderNumber, jsonResponse } = require("./_shared");
 
 // This function is called by STRIPE, not by your website. Stripe hits this
@@ -9,6 +9,10 @@ exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
     return jsonResponse(405, { error: "Method not allowed." });
   }
+
+  // Required so Netlify Blobs knows which site/deploy to read from when
+  // functions use the classic (Lambda-compatible) handler signature.
+  connectLambda(event);
 
   if (!process.env.STRIPE_SECRET_KEY || !process.env.STRIPE_WEBHOOK_SECRET) {
     console.error("Stripe env vars are missing on the server.");

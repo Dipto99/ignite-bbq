@@ -1,7 +1,11 @@
-const { getStore } = require("@netlify/blobs");
+const { getStore, connectLambda } = require("@netlify/blobs");
 const { MAX_BOOKINGS, getCurrentBatchKey, jsonResponse } = require("./_shared");
 
 exports.handler = async (event) => {
+  // Required so Netlify Blobs knows which site/deploy to read from when
+  // functions use the classic (Lambda-compatible) handler signature.
+  connectLambda(event);
+
   const providedKey = event.headers["x-admin-key"] || event.queryStringParameters?.key;
 
   if (!process.env.ADMIN_KEY) {

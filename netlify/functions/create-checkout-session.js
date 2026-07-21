@@ -1,4 +1,4 @@
-const { getStore } = require("@netlify/blobs");
+const { getStore, connectLambda } = require("@netlify/blobs");
 const {
   MAX_BOOKINGS,
   getCurrentBatchKey,
@@ -23,6 +23,10 @@ exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
     return jsonResponse(405, { error: "Method not allowed." });
   }
+
+  // Required so Netlify Blobs knows which site/deploy to read from when
+  // functions use the classic (Lambda-compatible) handler signature.
+  connectLambda(event);
 
   if (!process.env.STRIPE_SECRET_KEY) {
     return jsonResponse(500, {
