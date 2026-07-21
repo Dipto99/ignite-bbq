@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order | Ignite BBQ</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="order-page">
+<a href="index.html?skipIntro=true" class="back-link">← Back to home</a>
+
+  <main class="order-screen">
+    <a href="index.html" class="back-link">← Back to home</a>
+
+    <section class="order-card">
+    <div class="order-fire-bg"></div>
+      <img src="logo.png" alt="Ignite BBQ Logo" class="order-logo" />
+
+      <p class="eyebrow">Saturday Pickup</p>
+      <h1>Book Your BBQ Plate</h1>
+      <p class="order-subtitle">
+        Ribs, herb roasted potatoes, and seasonal salad.
+      </p>
+
+      <p class="capacity-line">
+        <span id="spotsLeft">…</span> spots left this week
+      </p>
+
+      <p id="soldOutMessage" class="sold-out hidden">
+        Sold out for this week. Please check again next order window.
+      </p>
+
+      <p id="canceledMessage" class="sold-out hidden">
+        Payment was canceled. Your spot was not booked — feel free to try again below.
+      </p>
+
+      <p id="orderErrorMessage" class="sold-out hidden"></p>
+
+      <form id="orderForm" class="order-form">
+        <label>
+          Full Name
+          <input type="text" id="customerName" required />
+        </label>
+
+        <label>
+          Email
+          <input type="email" id="customerEmail" required />
+        </label>
+
+        <label>
+          Pickup Time
+          <select id="pickupTime" required>
+            <option value="">Choose a time</option>
+            <option>1:00 PM</option>
+            <option>2:00 PM</option>
+            <option>3:00 PM</option>
+            <option>4:00 PM</option>
+            <option>5:00 PM</option>
+            <option>6:00 PM</option>
+          </select>
+        </label>
+
+        <div class="price-box">
+          <span>Total</span>
+          <strong>$25.00</strong>
+        </div>
+
+        <button type="submit" class="submit-order" id="submitOrderBtn">Pay & Book Order</button>
+        <p class="small-note" style="margin-top: 10px;">You'll be taken to a secure Stripe checkout page to pay. Your spot is booked the moment payment goes through.</p>
+      </form>
+
+      <div id="pendingBox" class="confirmation hidden">
+        <h2>Confirming your payment…</h2>
+        <p class="small-note">This only takes a couple of seconds. Please don't close this page.</p>
+      </div>
+
+      <div id="confirmationBox" class="confirmation hidden">
+        <h2>Order booked & paid 🔥</h2>
+        <p>Your order number is:</p>
+        <strong id="orderNumber"></strong>
+        <p class="small-note">
+          A confirmation email is on its way to you.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
