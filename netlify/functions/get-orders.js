@@ -40,6 +40,6 @@ exports.handler = async (event) => {
     return jsonResponse(200, { batches, maxBookings: MAX_BOOKINGS });
   } catch (err) {
     console.error("get-orders error:", err);
-    return jsonResponse(500, { error: "Could not load orders." });
+    return jsonResponse(500, { error: "Could not load orders.", detail: err.message });
   }
 };
