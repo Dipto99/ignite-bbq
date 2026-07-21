@@ -722,18 +722,20 @@ a {
 
 .menu-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-  max-width: 900px;
+  grid-template-columns: repeat(2, minmax(220px, 300px));
+  justify-content: center;
+  gap: 36px 30px;
+  max-width: 700px;
   margin-left: auto;
   margin-right: auto;
 }
 
 /* Make the Main Plate the centered, featured item: full width on its own
-   row, with the side + salad sitting underneath it. */
+   row, with the side + salad centered as a pair underneath it. */
 .menu-card--featured {
   grid-column: 1 / -1;
-  max-width: 420px;
+  max-width: 440px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -745,7 +747,7 @@ a {
   background: rgba(12, 5, 2, 0.88);
   border: 1px solid rgba(255, 122, 26, 0.28);
   border-radius: 26px;
-  padding: 18px;
+  padding: 22px 22px 26px;
   box-shadow: 0 0 35px rgba(255, 82, 0, 0.12);
   transform: translateY(20px);
   opacity: 0;
@@ -763,10 +765,6 @@ a {
   animation-delay: 0.16s;
 }
 
-.menu-page.active .menu-card:nth-child(4) {
-  animation-delay: 0.24s;
-}
-
 .menu-img {
   height: 210px;
   border-radius: 20px;
@@ -778,19 +776,19 @@ a {
   place-items: center;
   color: #b98a5a;
   font-style: italic;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
 
 .menu-card h3 {
   color: #ff9b4a;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   text-transform: uppercase;
   letter-spacing: 2px;
 }
 
 .menu-card p {
   color: #f8e2c3;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .menu-back {
@@ -836,12 +834,6 @@ a {
   }
 }
 
-@media (max-width: 900px) {
-  .menu-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
 @media (max-width: 560px) {
   .menu-page {
     padding: 22px;
@@ -849,6 +841,10 @@ a {
 
   .menu-grid {
     grid-template-columns: 1fr;
+  }
+
+  .menu-card--featured {
+    max-width: 340px;
   }
 
   .menu-img {
