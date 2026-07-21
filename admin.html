@@ -141,7 +141,7 @@
         if (!res.ok) {
           loginBox.classList.remove("hidden");
           wrap.classList.add("hidden");
-          loginError.textContent = data.error || "Could not load orders.";
+          loginError.textContent = data.detail ? `${data.error} (${data.detail})` : (data.error || "Could not load orders.");
           loginError.classList.remove("hidden");
           return;
         }
